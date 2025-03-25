@@ -30,6 +30,16 @@ public class SnippetController {
         return ResponseEntity.ok(snippets);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Snippet> getSnippetById(@PathVariable Integer id) {
+        Optional<Snippet> snippet = snippetService.findById(id);
+        if (snippet.isPresent()) {
+            Snippet foundSnippet = snippet.get();
+            return ResponseEntity.ok(foundSnippet);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Snippet> updateSnippet(@PathVariable Integer id, @RequestBody Snippet snippet) {
         try{
@@ -47,5 +57,12 @@ public class SnippetController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PostMapping
+    public ResponseEntity<Snippet> createSnippet(@RequestBody Snippet snippet) {
+        Snippet newSnippet = snippetService.SaveSnippet(snippet);
+
+        return new ResponseEntity<>(newSnippet, HttpStatus.CREATED);
     }
 }
