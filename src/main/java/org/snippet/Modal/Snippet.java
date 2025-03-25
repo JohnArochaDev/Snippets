@@ -1,8 +1,23 @@
 package org.snippet.Modal;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+
+@Entity
 public class Snippet {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(nullable = false)
     private String language;
+
+    @Column(nullable = false)
     private String code;
 
     public int getId() {
