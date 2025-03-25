@@ -3,6 +3,7 @@ package org.snippet.Service;
 import org.snippet.Modal.Snippet;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SnippetService {
     // Save
@@ -17,4 +18,7 @@ public interface SnippetService {
     // All
     List<Snippet> findByLanguage(String language);
     List<Snippet> findAll();
+
+    Optional<Snippet> findById(Integer id);
+
 }
