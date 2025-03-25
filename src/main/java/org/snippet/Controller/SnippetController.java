@@ -42,7 +42,7 @@ public class SnippetController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Snippet> updateSnippet(@PathVariable Integer id, @RequestBody Snippet snippet) {
-        try{
+        try {
             Optional<Snippet> foundSnippetOptional = snippetService.findById(id);
 
             if (foundSnippetOptional.isPresent()) {
@@ -64,5 +64,17 @@ public class SnippetController {
         Snippet newSnippet = snippetService.SaveSnippet(snippet);
 
         return new ResponseEntity<>(newSnippet, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Snippet> deleteSnippet(@PathVariable Integer id) {
+        Optional<Snippet> snippetOptional = snippetService.findById(id);
+        if (snippetOptional.isPresent()) {
+            snippetService.DeleteSnippet(snippetOptional.get());
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 }
