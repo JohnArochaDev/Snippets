@@ -75,6 +75,5 @@ public class SnippetController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
     }
 }
