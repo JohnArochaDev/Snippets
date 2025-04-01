@@ -69,10 +69,19 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
         String username = loginRequest.getUsername();
-        String password = loginRequest.getPassword();
+        String rawPassword = loginRequest.getPassword();
+
         try {
-            userService.login(username, password);
-            return ResponseEntity.ok("Login successful");
+            // Fetch the user from the database
+            User user = userService.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+            // Check if the provided password matches the stored password
+            if (passwordEncoder.matches(rawPassword, user.getPassword())) {
+                return ResponseEntity.ok("Login successful");
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+            }
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
