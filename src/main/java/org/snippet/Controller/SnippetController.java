@@ -17,12 +17,12 @@ import java.util.Optional;
 @RequestMapping("/snippets")
 public class SnippetController {
     private final SnippetService snippetService;
-
-    private final String secretKey = System.getenv("ENCRYPTED_KEY");
+    private final String secretKey;
 
     @Autowired
     public SnippetController(SnippetService snippetService) {
         this.snippetService = snippetService;
+        this.secretKey = System.getenv("ENCRYPTED_KEY");
     }
 
     // Get all Snippets
