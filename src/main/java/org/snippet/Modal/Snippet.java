@@ -1,13 +1,12 @@
 package org.snippet.Modal;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import jakarta.persistence.*;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Snippet {
 
     @Id
@@ -20,23 +19,39 @@ public class Snippet {
     @Column(nullable = false)
     private String code;
 
-    public int getId() {
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false) // Foreign key
+    private User user;
+
+    public Integer getId() {
         return this.id;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getLanguage() {
         return this.language;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public String getCode() {
         return this.code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
