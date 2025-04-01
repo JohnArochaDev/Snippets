@@ -49,7 +49,7 @@ public class SnippetController {
                 Snippet foundSnippet = foundSnippetOptional.get();
                 foundSnippet.setLanguage(snippet.getLanguage());
                 foundSnippet.setCode(snippet.getCode());
-                Snippet updatedSnippet = snippetService.UpdateSnippet(id, foundSnippet);
+                Snippet updatedSnippet = snippetService.updateSnippet(id, foundSnippet);
                 return ResponseEntity.ok(updatedSnippet);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -61,7 +61,7 @@ public class SnippetController {
 
     @PostMapping
     public ResponseEntity<Snippet> createSnippet(@RequestBody Snippet snippet) {
-        Snippet newSnippet = snippetService.SaveSnippet(snippet);
+        Snippet newSnippet = snippetService.saveSnippet(snippet);
 
         return new ResponseEntity<>(newSnippet, HttpStatus.CREATED);
     }
@@ -70,7 +70,7 @@ public class SnippetController {
     public ResponseEntity<Snippet> deleteSnippet(@PathVariable Integer id) {
         Optional<Snippet> snippetOptional = snippetService.findById(id);
         if (snippetOptional.isPresent()) {
-            snippetService.DeleteSnippet(snippetOptional.get());
+            snippetService.deleteSnippet(snippetOptional.get());
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

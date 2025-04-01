@@ -19,12 +19,12 @@ public class SnippetServiceImpl implements SnippetService {
     }
 
     @Override
-    public Snippet SaveSnippet(Snippet snippet) {
+    public Snippet saveSnippet(Snippet snippet) {
         return snippetRepository.save(snippet);
     }
 
     @Override
-    public Snippet UpdateSnippet(Integer id, Snippet snippet) {
+    public Snippet updateSnippet(Integer id, Snippet snippet) {
         Optional<Snippet> snippetOptional = snippetRepository.findById(id);
         if (snippetOptional.isPresent()) {
             Snippet updatedSnippet = snippetOptional.get();
@@ -37,7 +37,7 @@ public class SnippetServiceImpl implements SnippetService {
     }
 
     @Override
-    public void DeleteSnippet(Snippet snippet) {
+    public void deleteSnippet(Snippet snippet) {
         Optional<Snippet> optionalSnippet = snippetRepository.findById(snippet.getId());
         if (optionalSnippet.isPresent()) {
             snippetRepository.delete(snippet);

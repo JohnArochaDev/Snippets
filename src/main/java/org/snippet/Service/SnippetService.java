@@ -7,18 +7,17 @@ import java.util.Optional;
 
 public interface SnippetService {
     // Save
-    Snippet SaveSnippet(Snippet snippet);
+    Snippet saveSnippet(Snippet snippet);
 
     // Update
-    Snippet UpdateSnippet(Integer id, Snippet snippet);
+    Snippet updateSnippet(Integer id, Snippet snippet);
 
     // Delete
-    void DeleteSnippet(Snippet snippet);
+    void deleteSnippet(Snippet snippet);
 
     // All
     List<Snippet> findByLanguage(String language);
     List<Snippet> findAll();
-
     Optional<Snippet> findById(Integer id);
 
 }
