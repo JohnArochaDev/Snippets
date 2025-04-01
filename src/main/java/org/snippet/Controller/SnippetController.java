@@ -1,5 +1,8 @@
 package org.snippet.Controller;
 
+import static org.snippet.Security.AesEncryptionUtil.encrypt;
+import static org.snippet.Security.AesEncryptionUtil.decrypt;
+
 import org.snippet.Modal.Snippet;
 import org.snippet.Service.SnippetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,8 @@ import java.util.Optional;
 public class SnippetController {
     private final SnippetService snippetService;
 
+    private final String secretKey = System.getenv("ENCRYPTED_KEY");
+
     @Autowired
     public SnippetController(SnippetService snippetService) {
         this.snippetService = snippetService;
@@ -22,19 +27,23 @@ public class SnippetController {
 
     // Get all Snippets
     @GetMapping
-    public ResponseEntity<List<Snippet>> getAllSnippets() {
+    public ResponseEntity<List<Snippet>> getAllSnippets() throws Exception {
         List<Snippet> snippets = snippetService.findAll();
         if (snippets.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        for (Snippet snippet : snippets) {
+            snippet.setCode(decrypt(snippet.getCode(), secretKey));
         }
         return ResponseEntity.ok(snippets);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Snippet> getSnippetById(@PathVariable Integer id) {
+    public ResponseEntity<Snippet> getSnippetById(@PathVariable Integer id) throws Exception {
         Optional<Snippet> snippet = snippetService.findById(id);
         if (snippet.isPresent()) {
             Snippet foundSnippet = snippet.get();
+            foundSnippet.setCode(decrypt(foundSnippet.getCode(), secretKey));
             return ResponseEntity.ok(foundSnippet);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -48,7 +57,7 @@ public class SnippetController {
             if (foundSnippetOptional.isPresent()) {
                 Snippet foundSnippet = foundSnippetOptional.get();
                 foundSnippet.setLanguage(snippet.getLanguage());
-                foundSnippet.setCode(snippet.getCode());
+                foundSnippet.setCode(encrypt(snippet.getCode(), secretKey));
                 Snippet updatedSnippet = snippetService.updateSnippet(id, foundSnippet);
                 return ResponseEntity.ok(updatedSnippet);
             } else {
@@ -60,7 +69,8 @@ public class SnippetController {
     }
 
     @PostMapping
-    public ResponseEntity<Snippet> createSnippet(@RequestBody Snippet snippet) {
+    public ResponseEntity<Snippet> createSnippet(@RequestBody Snippet snippet) throws Exception {
+        snippet.setCode(encrypt(snippet.getCode(), secretKey));
         Snippet newSnippet = snippetService.saveSnippet(snippet);
 
         return new ResponseEntity<>(newSnippet, HttpStatus.CREATED);

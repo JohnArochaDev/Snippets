@@ -6,11 +6,11 @@ CREATE TABLE snippet (
 );
 
 -- Insert data into the snippet table
-INSERT INTO snippet (language, code) VALUES ('Python', 'print(''Hello, World!'')');
-INSERT INTO snippet (language, code) VALUES ('Python', 'def add(a, b):\n    return a + b');
-INSERT INTO snippet (language, code) VALUES ('Python', 'class Circle:\n    def __init__(self, radius):\n        self.radius = radius\n\n    def area(self):\n        return 3.14 * self.radius ** 2');
-INSERT INTO snippet (language, code) VALUES ('JavaScript', 'console.log(''Hello, World!'');');
-INSERT INTO snippet (language, code) VALUES ('JavaScript', 'function multiply(a, b) {\n    return a * b;\n}');
-INSERT INTO snippet (language, code) VALUES ('JavaScript', 'const square = num => num * num;');
-INSERT INTO snippet (language, code) VALUES ('Java', 'public class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}');
-INSERT INTO snippet (language, code) VALUES ('Java', 'public class Rectangle {\n    private int width;\n    private int height;\n\n    public Rectangle(int width, int height) {\n        this.width = width;\n        this.height = height;\n    }\n\n    public int getArea() {\n        return width * height;\n    }\n}');
+INSERT INTO snippet (language, code) VALUES ('Python', 'F6RVvB9M0kTp4c19cp1LlM3QzRiWwvXb/KFuVobMZOE=');
+INSERT INTO snippet (language, code) VALUES ('Python', 'eUy6pPPPrk7LnN+UN/Fpk5ae+RqpVhfxsy7bAJxUcSfZKP5imWpAAt+6XfQx51wr');
+INSERT INTO snippet (language, code) VALUES ('Python', 'NsFc1ycGXZu3iSpUqSWXkcTpzuNWpid09Fn3XuESlXIL9DV0muLnmV08sWJriDtgg9JQvzWuXH5hNyfRK85bF3qIsh82yDgfRmsg2oONoc7TmVmVDQ5E0dr0CM1QJs3Ii3aeEvKiiopC/uBdul7NTWh5f3HqbC7r1b/h2OJsLXRW9P773utyJcgLjBus+dAH');
+INSERT INTO snippet (language, code) VALUES ('JavaScript', 'PiF69yFYBt2TV2Q35npHc/2futbEJ6NLgYhxg8Ufs54=');
+INSERT INTO snippet (language, code) VALUES ('JavaScript', 'SL/6zBlSQZbwW3UjWXxk90odk3+xoIIhhsNMLgv+5MX1O3V0NY/K1NF/UAXwVoZc');
+INSERT INTO snippet (language, code) VALUES ('JavaScript', 'Hk0oXwuqmSCzVrroYWQg208ahL+WRcMn65O7uXbufK3ZKP5imWpAAt+6XfQx51wr');
+INSERT INTO snippet (language, code) VALUES ('Java', 'WSFieDbTsTxQdfEr22BKHd5DQFaHTFfM6IL92IftpJS30RXcdPFGHDj29rumUTHClncFsaX+v0DoBAsKfLFo6ulAvLlxIxmnojn9lEuJO3zG/WopaCcZoSFIJMzBPyrlcIFPbzlehbN1W15aHBk/kKOCyabnSFS13LhgMXizrO4=');
+INSERT INTO snippet (language, code) VALUES ('Java', 'a8ppheI5Cm6slpmCp28VirKyInKsQMwB6FOT/G2Y0ssIACmvpWGp4laqrtvWZX/tPMRyNSZBQFq7+zJJyQIj97VtzCVVARmQlLefK558MJmI7blxGvpq1p0GsQz8hSs2ZlyPVOrIPA+w9SwhXL6lbGQJ0eYKqNi9gT4ePtPiWo5o8kMayiRAnObW5uYu0ynfQ8YOSnyxXpQbyIRTLJ5XLZqVviehotjBQhQFIOVZzjwfF7JPDBc3GI4JzzMCdrSb/bmUkxqHEMG3ICYTYi+Saxgpcn6mOtoYfUIZsc6GxxOsOjboO0bp30b7FsuIRObIjCzJTH4yY7XmKbGEJ00ypA==');
