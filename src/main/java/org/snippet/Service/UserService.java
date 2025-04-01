@@ -15,5 +15,10 @@ public interface UserService {
     // Delete
     void deleteUser(UUID id);
 
+    // Find by
     Optional<User> findById(UUID id);
+    Optional<User> findByUsername(String username);
+
+    // Login
+    void login(String username, String password);
 }
