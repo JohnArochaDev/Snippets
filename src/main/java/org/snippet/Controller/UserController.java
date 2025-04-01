@@ -1,5 +1,6 @@
 package org.snippet.Controller;
 
+import org.snippet.Dto.LoginRequest;
 import org.snippet.Modal.User;
 import org.snippet.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -52,14 +54,16 @@ public class UserController {
         Optional<User> optionalUser = userService.findById(id);
         if (optionalUser.isPresent()) {
             userService.deleteUser(id);
-            return ResponseEntity.ok(optionalUser.get());
+            return ResponseEntity.noContent().build();
         } else {
             throw new RuntimeException("User not found");
         }
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+        String username = loginRequest.getUsername();
+        String password = loginRequest.getPassword();
         try {
             userService.login(username, password);
             return ResponseEntity.ok("Login successful");
