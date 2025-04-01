@@ -18,10 +18,10 @@ public class SnippetMapper {
     }
 
     public static List<SnippetDTO> toDTOList(List<Snippet> snippets) {
-        List <SnippetDTO> dtoList = new ArrayList<>();
+        List <SnippetDTO> dtos = new ArrayList<>();
         for (Snippet snippet : snippets) {
-            dtoList.add(convertToDto(snippet));
+            dtos.add(convertToDto(snippet));
         }
-        return dtoList;
+        return dtos;
     }
 }

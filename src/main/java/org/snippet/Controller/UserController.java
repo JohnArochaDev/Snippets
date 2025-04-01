@@ -6,8 +6,10 @@ import org.snippet.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -16,10 +18,12 @@ import java.util.UUID;
 @RequestMapping("/auth")
 public class UserController {
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // For development
@@ -43,9 +47,11 @@ public class UserController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<User> createUser(@RequestBody User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User newUser = userService.saveUser(user);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
 
