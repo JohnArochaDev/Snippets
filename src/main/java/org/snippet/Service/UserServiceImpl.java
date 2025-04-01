@@ -34,8 +34,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(User user, UUID id) {
+    public void deleteUser(UUID id) {
         Optional<User> userOptional = userRepository.findById(id);
         userOptional.ifPresent(userRepository::delete);
+    }
+
+    @Override
+    public Optional<User> findById(UUID id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            return optionalUser;
+        } else {
+            throw new RuntimeException("Snippet not found");
+        }
     }
 }

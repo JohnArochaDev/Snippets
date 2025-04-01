@@ -13,5 +13,7 @@ public interface UserService {
     User updateUser(User user, UUID id);
 
     // Delete
-    void deleteUser(User user, UUID id);
+    void deleteUser(UUID id);
+
+    Optional<User> findById(UUID id);
 }
