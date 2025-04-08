@@ -24,13 +24,13 @@ import java.util.Optional;
 @RequestMapping("/snippets")
 public class SnippetController {
     private final SnippetService snippetService;
-    private final UserService userService; // Inject UserService
+    private final UserService userService;
     private final String secretKey;
 
     @Autowired
     public SnippetController(SnippetService snippetService, UserService userService) {
         this.snippetService = snippetService;
-        this.userService = userService; // Initialize UserService
+        this.userService = userService;
         this.secretKey = System.getenv("ENCRYPTED_KEY");
     }
 

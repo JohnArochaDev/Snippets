@@ -4,7 +4,7 @@ public class SnippetDTO {
     private Integer id;
     private String language;
     private String code;
-    private String ownerUsername; // Include only the username of the owner
+    private String ownerUsername;
 
     // Getters and setters
     public Integer getId() {

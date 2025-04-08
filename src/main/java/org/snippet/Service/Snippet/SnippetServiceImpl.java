@@ -68,7 +68,7 @@ public class SnippetServiceImpl implements SnippetService {
 
     public Optional<Snippet> findById(Integer id) {
         Optional<Snippet> foundSnippet = snippetRepository.findById(id);
-        if (foundSnippet.isEmpty()) { // Or use !foundSnippet.isPresent() for Java 8
+        if (foundSnippet.isEmpty()) {
             throw new RuntimeException("Snippet not found");
         }
         return foundSnippet;

@@ -20,7 +20,7 @@ public class Snippet {
     private String code;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false) // Foreign key
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public Integer getId() {

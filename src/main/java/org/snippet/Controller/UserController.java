@@ -72,13 +72,10 @@ public class UserController {
         String rawPassword = loginRequest.getPassword();
 
         try {
-            // Fetch the user from the database
             User user = userService.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-            // Check if the provided password matches the stored password
             if (passwordEncoder.matches(rawPassword, user.getPassword())) {
-                // Generate a JWT token
                 String token = jwtUtil.generateToken(username);
                 return ResponseEntity.ok(token);
             } else {
