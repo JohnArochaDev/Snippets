@@ -7,11 +7,14 @@ import static org.snippet.Util.SnippetMapper.toDTOList;
 
 import org.snippet.Dto.SnippetDTO;
 import org.snippet.Modal.Snippet;
+import org.snippet.Modal.User;
 import org.snippet.Service.SnippetService;
+import org.snippet.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,11 +24,13 @@ import java.util.Optional;
 @RequestMapping("/snippets")
 public class SnippetController {
     private final SnippetService snippetService;
+    private final UserService userService; // Inject UserService
     private final String secretKey;
 
     @Autowired
-    public SnippetController(SnippetService snippetService) {
+    public SnippetController(SnippetService snippetService, UserService userService) {
         this.snippetService = snippetService;
+        this.userService = userService; // Initialize UserService
         this.secretKey = System.getenv("ENCRYPTED_KEY");
     }
 
@@ -78,6 +83,10 @@ public class SnippetController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping
     public ResponseEntity<SnippetDTO> createSnippet(@RequestBody Snippet snippet) throws Exception {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByUsername(username)
+            .orElseThrow(() -> new RuntimeException("Authenticated user not found"));
+        snippet.setUser(user);
         snippet.setCode(encrypt(snippet.getCode(), secretKey));
         Snippet newSnippet = snippetService.saveSnippet(snippet);
 
