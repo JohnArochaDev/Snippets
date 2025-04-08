@@ -1,4 +1,4 @@
-package org.snippet.Security;
+package org.snippet.Security.Jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

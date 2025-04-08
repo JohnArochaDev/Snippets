@@ -1,15 +1,15 @@
 package org.snippet.Controller;
 
-import static org.snippet.Security.AesEncryptionUtil.encrypt;
-import static org.snippet.Security.AesEncryptionUtil.decrypt;
+import static org.snippet.Security.Encryption.AesEncryptionUtil.encrypt;
+import static org.snippet.Security.Encryption.AesEncryptionUtil.decrypt;
 import static org.snippet.Util.SnippetMapper.convertToDto;
 import static org.snippet.Util.SnippetMapper.toDTOList;
 
-import org.snippet.Dto.SnippetDTO;
+import org.snippet.Modal.Dto.SnippetDTO;
 import org.snippet.Modal.Snippet;
 import org.snippet.Modal.User;
-import org.snippet.Service.SnippetService;
-import org.snippet.Service.UserService;
+import org.snippet.Service.Snippet.SnippetService;
+import org.snippet.Service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +44,6 @@ public class SnippetController {
         for (Snippet snippet : snippets) {
             snippet.setCode(decrypt(snippet.getCode(), secretKey));
         }
-
         return ResponseEntity.ok(toDTOList(snippets));
     }
 

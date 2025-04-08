@@ -1,4 +1,4 @@
-package org.snippet.Security;
+package org.snippet.Security.Database;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

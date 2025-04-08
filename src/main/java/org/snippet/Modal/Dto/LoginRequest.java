@@ -1,4 +1,4 @@
-package org.snippet.Dto;
+package org.snippet.Modal.Dto;
 
 public class LoginRequest {
     private String username;

@@ -1,4 +1,4 @@
-package org.snippet.Service;
+package org.snippet.Service.Snippet;
 
 import org.snippet.Modal.Snippet;
 

@@ -1,9 +1,9 @@
 package org.snippet.Controller;
 
-import org.snippet.Dto.LoginRequest;
+import org.snippet.Modal.Dto.LoginRequest;
 import org.snippet.Modal.User;
-import org.snippet.Security.JwtUtil;
-import org.snippet.Service.UserService;
+import org.snippet.Security.Jwt.JwtUtil;
+import org.snippet.Service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

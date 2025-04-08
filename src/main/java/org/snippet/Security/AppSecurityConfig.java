@@ -1,5 +1,6 @@
 package org.snippet.Security;
 
+import org.snippet.Security.Jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;

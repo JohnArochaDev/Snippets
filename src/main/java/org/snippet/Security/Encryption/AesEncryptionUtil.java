@@ -1,4 +1,4 @@
-package org.snippet.Security;
+package org.snippet.Security.Encryption;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;

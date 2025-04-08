@@ -1,4 +1,4 @@
-package org.snippet.Service;
+package org.snippet.Service.User;
 
 import org.snippet.Modal.User;
 import org.snippet.Repository.UserRepository;

@@ -1,6 +1,6 @@
 package org.snippet.Util;
 
-import org.snippet.Dto.SnippetDTO;
+import org.snippet.Modal.Dto.SnippetDTO;
 import org.snippet.Modal.Snippet;
 
 import java.util.ArrayList;

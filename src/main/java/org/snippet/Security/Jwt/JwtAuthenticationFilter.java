@@ -1,4 +1,4 @@
-package org.snippet.Security;
+package org.snippet.Security.Jwt;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
