@@ -2,6 +2,7 @@ package org.snippet.Controller;
 
 import org.snippet.Dto.LoginRequest;
 import org.snippet.Modal.User;
+import org.snippet.Security.JwtUtil;
 import org.snippet.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.charset.Charset;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,14 +18,15 @@ import java.util.UUID;
 public class UserController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
     @Autowired
-    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
-    // For development
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable UUID id) {
         Optional<User> optionalUser = userService.findById(id);
@@ -78,7 +78,9 @@ public class UserController {
 
             // Check if the provided password matches the stored password
             if (passwordEncoder.matches(rawPassword, user.getPassword())) {
-                return ResponseEntity.ok("Login successful");
+                // Generate a JWT token
+                String token = jwtUtil.generateToken(username);
+                return ResponseEntity.ok(token);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
             }

@@ -11,6 +11,7 @@ import org.snippet.Service.SnippetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class SnippetController {
         this.secretKey = System.getenv("ENCRYPTED_KEY");
     }
 
-    // Get all Snippets
+    @PreAuthorize("isAuthenticated()")
     @GetMapping
     public ResponseEntity<List<SnippetDTO>> getAllSnippets() throws Exception {
         List<Snippet> snippets = snippetService.findAll();
@@ -42,6 +43,7 @@ public class SnippetController {
         return ResponseEntity.ok(toDTOList(snippets));
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/{id}")
     public ResponseEntity<SnippetDTO> getSnippetById(@PathVariable Integer id) throws Exception {
         Optional<Snippet> snippet = snippetService.findById(id);
@@ -53,6 +55,7 @@ public class SnippetController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PutMapping("/{id}")
     public ResponseEntity<SnippetDTO> updateSnippet(@PathVariable Integer id, @RequestBody Snippet snippet) {
         try {
@@ -72,6 +75,7 @@ public class SnippetController {
         }
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping
     public ResponseEntity<SnippetDTO> createSnippet(@RequestBody Snippet snippet) throws Exception {
         snippet.setCode(encrypt(snippet.getCode(), secretKey));
@@ -80,6 +84,7 @@ public class SnippetController {
         return new ResponseEntity<>(convertToDto(newSnippet), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/{id}")
     public ResponseEntity<Snippet> deleteSnippet(@PathVariable Integer id) {
         Optional<Snippet> snippetOptional = snippetService.findById(id);
